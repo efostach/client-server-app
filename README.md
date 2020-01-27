@@ -6,6 +6,8 @@ There are three type of accounts:
 * Moderator - access to create, read, update and remove employee and department entities
 * User - access just for reading information about all entities
 
+When user make a registration in the app the system sent generated code to the mobile phone number to accept the registration (in this case used https://www.twilio.com/).
+
 ## Used technologies
 * Java
 * Spring (MVC, Web, Data, Security, Boot)
