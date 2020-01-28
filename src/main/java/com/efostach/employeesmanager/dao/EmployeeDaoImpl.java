@@ -5,15 +5,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao {
     private static final Logger logger = LoggerFactory.getLogger(EmployeeDaoImpl.class);
 
     private SessionFactory sessionFactory;
 
-    public EmployeeDaoImpl(SessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

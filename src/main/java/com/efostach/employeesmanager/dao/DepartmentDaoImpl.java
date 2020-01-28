@@ -15,7 +15,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     private SessionFactory sessionFactory;
 
-    public DepartmentDaoImpl(SessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
