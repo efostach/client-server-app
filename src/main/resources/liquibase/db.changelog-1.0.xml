@@ -1,0 +1,88 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="1.0.0" author="helen">
+
+        <createTable tableName="users">
+            <column name="id" type="INT(11)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="user_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="roles">
+            <column name="id" type="INT(11)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user_roles">
+            <column name="user_id" type="INT(11)" autoIncrement="true">
+                <constraints primaryKey="true"
+                             nullable="false"
+                             references="users(id)"
+                             foreignKeyName="FK_user_roles_user_id"/>
+            </column>
+
+            <column name="role_id" type="INT(11)">
+                <constraints primaryKey="true"
+                             nullable="false"
+                             references="roles(id)"
+                             foreignKeyName="FK_user_roles_role_id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="departments">
+            <column name="id" type="INT(11)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="employees">
+            <column name="id" type="INT(11)" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="first_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_of_birth" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="salary" type="INT(11)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="start_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="department" type="INT(11)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
