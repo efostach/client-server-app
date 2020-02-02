@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class EmployeeController {
+
+    @Autowired
     private EmployeeService employeeService;
 
-    @Autowired(required = true)
     @Qualifier(value = "employeeService")
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -40,14 +41,14 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/employees/remove/{id}")
     public String removeEmployee(@PathVariable("id") int id){
         this.employeeService.remove(id);
 
         return "redirect:/employees";
     }
 
-    @RequestMapping("edit/{id}")
+    @RequestMapping("/employees/edit/{id}")
     public String editEmployee(@PathVariable("id") int id, Model model){
         model.addAttribute("employee", this.employeeService.getById(id));
         model.addAttribute("listEmployees", this.employeeService.listAll());
@@ -55,7 +56,7 @@ public class EmployeeController {
         return "employees";
     }
 
-    @RequestMapping("employeedata/{id}")
+    @RequestMapping("/employees/data/{id}")
     public String employeeData(@PathVariable("id") int id, Model model){
         model.addAttribute("employee", this.employeeService.getById(id));
 
