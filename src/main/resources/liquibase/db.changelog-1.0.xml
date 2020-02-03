@@ -80,7 +80,9 @@
             </column>
 
             <column name="department" type="INT(11)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"
+                             references="departments(id)"
+                             foreignKeyName="FK_department"/>
             </column>
 
         </createTable>
