@@ -8,9 +8,19 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/departments" access="hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/employees" access="hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/departments/add" access="hasAnyRole('ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/employees/add" access="hasAnyRole('ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/departments/remove/{id}" access="hasAnyRole('ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/employees/remove/{id}" access="hasAnyRole('ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/departments/edit/{id}" access="hasAnyRole('ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/employees/edit/{id}" access="hasAnyRole('ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/departments/data/{id}" access="hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/employees/data/{id}" access="hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')"/>
 
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>

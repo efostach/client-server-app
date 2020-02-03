@@ -27,6 +27,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
             </props>
         </property>
     </bean>
@@ -35,43 +36,6 @@
           class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-
-<!--    &lt;!&ndash; Hibernate 4 SessionFactory Bean definition &ndash;&gt;-->
-<!--    <bean id="hibernate4AnnotatedSessionFactory"-->
-<!--          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
-<!--        <property name="dataSource" ref="dataSource"/>-->
-<!--        <property name="annotatedClasses">-->
-<!--            <list>-->
-<!--                <value>com.efostach.employeesmanager.model.Department</value>-->
-<!--                <value>com.efostach.employeesmanager.model.Employee</value>-->
-<!--            </list>-->
-<!--        </property>-->
-<!--        <property name="hibernateProperties">-->
-<!--            <props>-->
-<!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect-->
-<!--                </prop>-->
-<!--                <prop key="hibernate.show_sql">true</prop>-->
-<!--            </props>-->
-<!--        </property>-->
-<!--    </bean>-->
-
-<!--    &lt;!&ndash;DepartmentDao and DepartmentService beans&ndash;&gt;-->
-<!--    <bean id="departmentDao" class="com.efostach.employeesmanager.dao.DepartmentDaoImpl">-->
-<!--        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="departmentService" class="com.efostach.employeesmanager.service.DepartmentServiceImpl">-->
-<!--        <property name="departmentDao" ref="departmentDao"/>-->
-<!--    </bean>-->
-
-<!--    &lt;!&ndash;EmployeeDao and EmployeeService beans&ndash;&gt;-->
-<!--    <bean id="employeeDao" class="com.efostach.employeesmanager.dao.EmployeeDaoImpl">-->
-<!--        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="employeeService" class="com.efostach.employeesmanager.service.EmployeeServiceImpl">-->
-<!--        <property name="employeeDao" ref="employeeDao"/>-->
-<!--    </bean>-->
 
     <tx:annotation-driven/>
 
