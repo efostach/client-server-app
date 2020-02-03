@@ -5,21 +5,25 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
- * Simple JavaBean domain object that represents Department.
+ * Simple JavaBean domain object that represents Role.
  *
  * @author Helen Fostach
  * @version 1.0
  */
 
 @Entity
-@Table(name = "departments")
+@Table(name = "roles")
 @Getter
 @Setter
 @ToString
-public class Department extends BaseEntity {
+public class Role extends BaseEntity {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 }

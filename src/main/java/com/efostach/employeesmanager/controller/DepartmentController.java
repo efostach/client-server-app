@@ -1,7 +1,8 @@
-package com.efostach.employeesmanager.rest;
+package com.efostach.employeesmanager.controller;
 
 import com.efostach.employeesmanager.model.Department;
 import com.efostach.employeesmanager.service.DepartmentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,14 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * REST controller for {@link Department} connected requests.
+ * Controller for {@link Department} connected requests.
  *
  * @author Helen Fostach
  * @version 1.0
  */
 
-@RestController
-@RequestMapping("/api/departments/data/")
+@Slf4j
 @Controller
 public class DepartmentController {
 
@@ -38,10 +38,14 @@ public class DepartmentController {
 
     @RequestMapping(value = "/departments/add", method = RequestMethod.POST)
     public String addDepartment(@ModelAttribute("department") Department department){
-        if(department.getId() == 0){
-            this.departmentService.add(department);
-        }else {
-            this.departmentService.update(department);
+        if(department != null) {
+            if (department.getId() == null) {
+                this.departmentService.add(department);
+                log.info("Department successfully added: " + department);
+            } else {
+                this.departmentService.update(department);
+                log.info("Department successfully updated: " + department);
+            }
         }
 
         return "redirect:/departments";
@@ -50,7 +54,7 @@ public class DepartmentController {
     @RequestMapping("/departments/remove/{id}")
     public String removeDepartment(@PathVariable("id") Long id){
         this.departmentService.remove(id);
-
+        log.info("Department successfully removed");
         return "redirect:/departments";
     }
 
@@ -58,7 +62,6 @@ public class DepartmentController {
     public String editDepartment(@PathVariable("id") Long id, Model model){
         model.addAttribute("department", this.departmentService.getById(id));
         model.addAttribute("listDepartments", this.departmentService.listAll());
-
         return "departments";
     }
 
@@ -68,20 +71,4 @@ public class DepartmentController {
 
         return "departmentdata";
     }
-
-//    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String> departmentData(@PathVariable("id") int id, Model model) {
-//        if (id == null) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//
-//        Department department = this.departmentService.getById(id);
-//
-//        if (department == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//
-//        return new ResponseEntity<>(department, HttpStatus.OK);
-//    }
-
 }
