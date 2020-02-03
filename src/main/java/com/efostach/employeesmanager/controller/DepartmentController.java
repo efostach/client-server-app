@@ -1,12 +1,9 @@
-package com.efostach.employeesmanager.controller;
+package com.efostach.employeesmanager.rest;
 
 import com.efostach.employeesmanager.model.Department;
 import com.efostach.employeesmanager.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,14 +48,14 @@ public class DepartmentController {
     }
 
     @RequestMapping("/departments/remove/{id}")
-    public String removeDepartment(@PathVariable("id") int id){
+    public String removeDepartment(@PathVariable("id") Long id){
         this.departmentService.remove(id);
 
         return "redirect:/departments";
     }
 
     @RequestMapping("/departments/edit/{id}")
-    public String editDepartment(@PathVariable("id") int id, Model model){
+    public String editDepartment(@PathVariable("id") Long id, Model model){
         model.addAttribute("department", this.departmentService.getById(id));
         model.addAttribute("listDepartments", this.departmentService.listAll());
 
@@ -66,7 +63,7 @@ public class DepartmentController {
     }
 
     @RequestMapping("/departments/data/{id}")
-    public String departmentData(@PathVariable("id") int id, Model model){
+    public String departmentData(@PathVariable("id") Long id, Model model){
         model.addAttribute("department", this.departmentService.getById(id));
 
         return "departmentdata";
