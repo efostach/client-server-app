@@ -16,6 +16,10 @@
             <column name="password" type="VARCHAR(45)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="phone_number" type="VARCHAR(13)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <createTable tableName="roles">

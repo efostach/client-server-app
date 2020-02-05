@@ -3,6 +3,7 @@ package com.efostach.employeesmanager.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -29,6 +30,12 @@ public class User extends BaseEntity {
 
     @Transient
     private String confirmPassword;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Transient
+    private String verificationCode;
 
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),

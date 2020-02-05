@@ -14,5 +14,9 @@ public interface UserService {
 
     void save(User user);
 
-    User findByUsername(String username);
+    void remove(User user);
+
+    User findByUsername(String userName);
+
+    void sendMsg(String phoneNumber);
 }

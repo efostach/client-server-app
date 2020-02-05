@@ -53,6 +53,13 @@
             </div>
         </spring:bind>
 
+        <spring:bind path="phoneNumber">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="phoneNumber" path="phoneNumber" class="form-control" placeholder="Phone Number"></form:input>
+                <form:errors path="phoneNumber"></form:errors>
+            </div>
+        </spring:bind>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
 

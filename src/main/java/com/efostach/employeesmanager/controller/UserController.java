@@ -3,7 +3,9 @@ package com.efostach.employeesmanager.controller;
 import com.efostach.employeesmanager.model.User;
 import com.efostach.employeesmanager.service.SecurityService;
 import com.efostach.employeesmanager.service.UserService;
+import com.efostach.employeesmanager.twilio.TwilioSmsVerification;
 import com.efostach.employeesmanager.validator.UserValidator;
+import com.efostach.employeesmanager.validator.VerificationCodeValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,24 +33,56 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private VerificationCodeValidation verificationCodeValidation;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+        model.addAttribute( "userForm", new User());
 
         return "registration";
     }
 
+    @RequestMapping(value = "/verification", method = RequestMethod.GET)
+    public String verification(Model model, User user) {
+        model.addAttribute( "verificationForm", user);
+
+        return "verification";
+    }
+
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
 
+        TwilioSmsVerification a = new TwilioSmsVerification();
+        userForm.setVerificationCode(a.sentMsg(userForm.getPhoneNumber()));
+
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
+
+        return "redirect:/verification";
+    }
+
+    @RequestMapping(value = "/verification", method = RequestMethod.POST)
+    public String verification(@ModelAttribute("verificationForm")User verificationForm, User user, BindingResult bindingResult, Model model) {
+
+        verificationCodeValidation.validate(verificationForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "verification";
+        }
+
+        if (!user.getVerificationCode().equals(verificationForm.getVerificationCode())) {
+            model.addAttribute("error", "Verification code is wrong.");
+            userService.remove(user);
+            return "redirect:/registration";
+        }
 
         return "redirect:/welcome";
     }
