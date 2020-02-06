@@ -1,4 +1,6 @@
-# Application Info
+# Employees Management Application
+[![Build Status](https://travis-ci.org/efostach/spring-client-server-app.svg?branch=master)](https://travis-ci.org/efostach/spring-client-server-app)
+## Application Info
 This application allows storing information about employees (name, salary, date of birth, etc.) and departments.
 
 There are three type of accounts: 
