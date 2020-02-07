@@ -1,4 +1,4 @@
-package com.efostach.employeesmanager.dao;
+package com.efostach.employeesmanager.repository;
 
 import com.efostach.employeesmanager.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 
-public interface RoleDao extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 }

@@ -1,4 +1,4 @@
-package com.efostach.employeesmanager.dao;
+package com.efostach.employeesmanager.repository;
 
 import com.efostach.employeesmanager.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 
-public interface UserDao extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 }

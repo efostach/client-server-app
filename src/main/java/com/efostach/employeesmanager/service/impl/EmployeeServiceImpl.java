@@ -1,7 +1,7 @@
 package com.efostach.employeesmanager.service;
 
-import com.efostach.employeesmanager.dao.EmployeeDao;
 import com.efostach.employeesmanager.model.Employee;
+import com.efostach.employeesmanager.repository.EmployeeReository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,39 +21,39 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeReository employeeReository;
 
-    public void setEmployeeDao(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
+//    public void setEmployeeDao(EmployeeDao employeeDao) {
+//        this.employeeDao = employeeDao;
+//    }
 
     @Override
     @Transactional
     public void add(Employee employee) {
-        this.employeeDao.save(employee);
+        this.employeeReository.save(employee);
     }
 
     @Override
     @Transactional
     public void update(Employee employee) {
-        this.employeeDao.save(employee);
+        this.employeeReository.save(employee);
     }
 
     @Override
     @Transactional
     public void remove(Long id) {
-        this.employeeDao.delete(id);
+        this.employeeReository.deleteById(id);
     }
 
     @Override
     @Transactional
     public Employee getById(Long id) {
-        return this.employeeDao.getOne(id);
+        return this.employeeReository.getOne(id);
     }
 
     @Override
     @Transactional
     public List<Employee> listAll() {
-        return this.employeeDao.findAll();
+        return this.employeeReository.findAll();
     }
 }

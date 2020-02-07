@@ -1,6 +1,5 @@
-package com.efostach.employeesmanager.dao;
+package com.efostach.employeesmanager.repository;
 
-import com.efostach.employeesmanager.model.Department;
 import com.efostach.employeesmanager.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 
-public interface EmployeeDao extends JpaRepository<Employee, Long> {
+public interface EmployeeReository extends JpaRepository<Employee, Long> {
 
 }
