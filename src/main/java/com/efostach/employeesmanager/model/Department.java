@@ -1,5 +1,6 @@
 package com.efostach.employeesmanager.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "departments")
+@Data
 @Getter
 @Setter
 @ToString
