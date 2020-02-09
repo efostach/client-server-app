@@ -3,11 +3,10 @@ package com.efostach.employeesmanager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+@SpringBootApplication
 public class AppRunner {
-    @SpringBootApplication
-    public static class EmployeesManager {
-        public static void main(String[] args) {
-            SpringApplication.run(EmployeesManager.class);
-        }
+    public static void main(String[] args) {
+        SpringApplication.run(AppRunner.class);
     }
 }
