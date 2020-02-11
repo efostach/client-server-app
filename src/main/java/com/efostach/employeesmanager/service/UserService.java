@@ -1,7 +1,8 @@
 package com.efostach.employeesmanager.service;
 
-import com.efostach.employeesmanager.model.Department;
 import com.efostach.employeesmanager.model.User;
+
+import java.util.List;
 
 /**
  * Service interface for {@link User} class.
@@ -12,11 +13,15 @@ import com.efostach.employeesmanager.model.User;
 
 public interface UserService {
 
-    void save(User user);
+    User register(User user);
 
-    void remove(User user);
+    User confirm(Long id, String code);
 
-    User findByUsername(String userName);
+    List<User> getAll();
 
-    void sendMsg(String phoneNumber);
+    User findByUsername(String username);
+
+    User findById(Long id);
+
+    void remove(Long id);
 }

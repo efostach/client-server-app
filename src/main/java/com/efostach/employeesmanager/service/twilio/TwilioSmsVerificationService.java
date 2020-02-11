@@ -1,4 +1,4 @@
-package com.efostach.employeesmanager.twilio;
+package com.efostach.employeesmanager.service.twilio;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 @Service
 @Slf4j
-public class TwilioSmsVerification {
+public class TwilioSmsVerificationService {
 
     public static final String ACCOUNT_SID = "ACd0aa135af494cd834baf9632973831ec";
     public static final String AUTH_TOKEN = "235dcec71001ddef977000fb89243139";
@@ -19,6 +19,7 @@ public class TwilioSmsVerification {
     public String sentMsg(String phoneNumber) {
         String sendCode = generateVerificationCode();
         log.info("Verification Code: {}", sendCode);
+        log.info("Phone Number: {}", phoneNumber);
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 

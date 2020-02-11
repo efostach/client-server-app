@@ -1,6 +1,5 @@
 package com.efostach.employeesmanager.service;
 
-import com.efostach.employeesmanager.model.Department;
 import com.efostach.employeesmanager.model.Employee;
 
 /**
