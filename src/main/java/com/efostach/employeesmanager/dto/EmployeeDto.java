@@ -1,13 +1,18 @@
 package com.efostach.employeesmanager.dto;
 
 import com.efostach.employeesmanager.model.Employee;
+import com.efostach.employeesmanager.model.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * DTO class for user requests by all rolls
+ * Employee DTO class for user requests
  *
  * @author Helen Fostach
  * @version 1.0
@@ -19,22 +24,23 @@ public class EmployeeDto {
     private Long id;
     private String firstName;
     private String lastName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String dateOfBirth;
-    private int salary;
+    private BigDecimal salary;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String startDate;
-    private int department;
+    private Long department;
 
-    public Employee toEmployee(){
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
-        employee.setDateOfBirth(dateOfBirth);
-        employee.setSalary(salary);
-        employee.setStartDate(startDate);
-        employee.setDepartment(department);
+    public static List<EmployeeDto> fromEmployee(List<Employee> employees){
+        List<EmployeeDto> employeeDto = new ArrayList<>();
 
-        return employee;
+        for (Employee employee : employees) {
+            employeeDto.add(fromEmployee(employee));
+        }
+
+        return employeeDto;
     }
 
     public static EmployeeDto fromEmployee(Employee employee){

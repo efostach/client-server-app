@@ -5,8 +5,11 @@ import com.efostach.employeesmanager.model.Employee;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * DTO class for user requests by all rolls
+ * Department DTO class for user requests
  *
  * @author Helen Fostach
  * @version 1.0
@@ -18,12 +21,14 @@ public class DepartmentDto {
     private Long id;
     private String name;
 
-    public Department toDepartment(){
-        Department department = new Department();
-        department.setId(id);
-        department.setName(name);
+    public static List<DepartmentDto> fromDepartment(List<Department> departments){
+        List<DepartmentDto> departmentDto = new ArrayList<>();
 
-        return department;
+        for (Department department : departments) {
+            departmentDto.add(fromDepartment(department));
+        }
+
+        return departmentDto;
     }
 
     public static DepartmentDto fromDepartment(Department department) {

@@ -4,7 +4,7 @@ import com.efostach.employeesmanager.model.User;
 import lombok.Data;
 
 /**
- * DTO class for authentication (login) request.
+ * DTO class for authentication (login) request
  *
  * @author Helen Fostach
  * @version 1.0
