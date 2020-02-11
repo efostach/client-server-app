@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Simple JavaBean domain object that represents Employee.
@@ -17,9 +19,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employees")
 @Data
-@Getter
-@Setter
-@ToString
 public class Employee extends BaseEntity {
 
     @Column(name = "first_name")
@@ -32,11 +31,11 @@ public class Employee extends BaseEntity {
     private String dateOfBirth;
 
     @Column(name = "salary")
-    private int salary;
+    private BigDecimal salary;
 
     @Column(name = "start_date")
     private String startDate;
 
     @Column(name = "department")
-    private int department;
+    private Long department;
 }

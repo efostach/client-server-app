@@ -17,9 +17,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "departments")
 @Data
-@Getter
-@Setter
-@ToString
 public class Department extends BaseEntity {
 
     @Column(name = "name")

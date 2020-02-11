@@ -20,9 +20,6 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
-@Getter
-@Setter
-@ToString
 public class BaseEntity {
 
     @Id
