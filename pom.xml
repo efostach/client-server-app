@@ -29,7 +29,7 @@
         <spark-core.version>2.9.1</spark-core.version>
         <spark-template-freemarker.version>2.7.1</spark-template-freemarker.version>
         <heroku-jdbc.version>0.1.1</heroku-jdbc.version>
-        <liquibase-maven-plugin.version>3.1.5</liquibase-maven-plugin.version>
+        <liquibase-maven-plugin.version>3.5.1</liquibase-maven-plugin.version>
         <webapp-runner.version>9.0.27.0</webapp-runner.version>
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
 
