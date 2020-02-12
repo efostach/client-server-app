@@ -30,7 +30,6 @@
         <spark-template-freemarker.version>2.7.1</spark-template-freemarker.version>
         <heroku-jdbc.version>0.1.1</heroku-jdbc.version>
         <liquibase-maven-plugin.version>3.5.5</liquibase-maven-plugin.version>
-        <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <webapp-runner.version>9.0.27.0</webapp-runner.version>
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
 
@@ -190,7 +189,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven-dependency-plugin.version}</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -202,7 +201,7 @@
                                 <artifactItem>
                                     <groupId>com.github.jsimone</groupId>
                                     <artifactId>webapp-runner</artifactId>
-                                    <version>${webapp-runner.version}}</version>
+                                    <version>${webapp-runner.version}</version>
                                     <destFileName>webapp-runner.jar</destFileName>
                                 </artifactItem>
                             </artifactItems>
