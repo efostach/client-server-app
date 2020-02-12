@@ -18,13 +18,6 @@ public class AuthenticationRequestDto {
     private String phoneNumber;
     private String verificationCode;
 
-    public User toUser(){
-        User user = new User();
-        user.setId(Long.valueOf(id));
-
-        return user;
-    }
-
     public static AuthenticationRequestDto fromUser(User user) {
         AuthenticationRequestDto authenticationRequestDto = new AuthenticationRequestDto();
         authenticationRequestDto.setId(String.valueOf(user.getId()));

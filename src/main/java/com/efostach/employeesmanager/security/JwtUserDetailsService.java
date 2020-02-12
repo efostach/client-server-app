@@ -1,5 +1,6 @@
 package com.efostach.employeesmanager.security;
 
+import com.efostach.employeesmanager.model.Status;
 import com.efostach.employeesmanager.model.User;
 import com.efostach.employeesmanager.security.jwt.JwtUser;
 import com.efostach.employeesmanager.security.jwt.JwtUserFactory;
@@ -33,12 +34,16 @@ public class JwtUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByUsername(username);
 
-        if (user == null) {
-            throw new UsernameNotFoundException("User with username={} not found" + username);
+        if (user == null || user.getStatus() == Status.DELETED) {
+            throw new UsernameNotFoundException("User with username: " + username + " not found");
+        }
+
+        if (user.getStatus() == Status.NOT_ACTIVE) {
+            throw new UsernameNotFoundException("User with username: " + username + " not confirm registration");
         }
 
         JwtUser jwtUser = JwtUserFactory.create(user);
-        log.info("IN loadUserByUsername - user with username={} successfully loaded", username);
+        log.info("IN loadUserByUsername - user with username: {} successfully loaded", username);
         return jwtUser;
     }
 }

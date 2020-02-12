@@ -29,7 +29,8 @@ public class JwtUser implements UserDetails {
             Long id,
             String username,
             String phoneNumber,
-            String password, Collection<? extends GrantedAuthority> authorities,
+            String password,
+            Collection<? extends GrantedAuthority> authorities,
             boolean enabled,
             Date lastPasswordResetDate
     ) {

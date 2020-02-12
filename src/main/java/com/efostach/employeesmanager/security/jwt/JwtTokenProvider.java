@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,12 +43,12 @@ public class JwtTokenProvider {
     private long validityInMilliseconds;
 
     @Autowired
+    @Qualifier("jwtUserDetailsService")
     private UserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     @PostConstruct
@@ -72,8 +73,11 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
+        String username = getUsername(token);
+        log.info("IN getAuthentication - username: {} get by token", username);
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
         log.info("IN getAuthentication - userDetails: {}", userDetails);
+        log.info("IN getAuthentication - authorities: {}",userDetails.getAuthorities());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
@@ -109,7 +113,7 @@ public class JwtTokenProvider {
         userRoles.forEach(role -> {
             result.add(role.getName());
         });
-
+        log.info("IN getRoleNames - user roles: {}", result);
         return result;
     }
 }

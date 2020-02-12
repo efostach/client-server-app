@@ -6,6 +6,7 @@ import com.efostach.employeesmanager.model.User;
 import com.efostach.employeesmanager.security.jwt.JwtTokenProvider;
 import com.efostach.employeesmanager.service.UserService;
 import com.efostach.employeesmanager.service.twilio.TwilioSmsVerificationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,16 +31,14 @@ import java.util.Map;
  * @version 1.0
  */
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/auth/")
 public class AuthenticationRestControllerV1 {
 
     private final AuthenticationManager authenticationManager;
-
     private final JwtTokenProvider jwtTokenProvider;
-
     private final UserService userService;
-
     private final TwilioSmsVerificationService twilioSmsVerificationService;
 
     @Autowired
@@ -57,12 +56,14 @@ public class AuthenticationRestControllerV1 {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
             User user = userService.findByUsername(username);
 
+            log.info("IN login - user roles: {}", user.getRoles());
+
             if (user == null) {
                 throw new UsernameNotFoundException("User with username: " + username + " not found");
-            } else {
-                if (!user.getStatus().equals(Status.ACTIVE)) {
-                    return new ResponseEntity("User with username: " + username + " is not active", HttpStatus.BAD_REQUEST);
-                }
+            }
+
+            if (!user.getStatus().equals(Status.ACTIVE)) {
+                return new ResponseEntity("User with username: " + username + " is not active", HttpStatus.BAD_REQUEST);
             }
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
@@ -71,10 +72,12 @@ public class AuthenticationRestControllerV1 {
             response.put("username", username);
             response.put("token", token);
 
-            return ResponseEntity.ok(response);
-        } catch (AuthenticationException e) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (
+                AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
+
     }
 
     @PostMapping("logout")
