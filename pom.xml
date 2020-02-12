@@ -29,6 +29,11 @@
         <spark-core.version>2.9.1</spark-core.version>
         <spark-template-freemarker.version>2.7.1</spark-template-freemarker.version>
         <heroku-jdbc.version>0.1.1</heroku-jdbc.version>
+        <liquibase-maven-plugin.version>3.5.5</liquibase-maven-plugin.version>
+        <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
+        <webapp-runner.version>9.0.27.0</webapp-runner.version>
+        <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd-HH:mm:ss SSS</maven.build.timestamp.format>
@@ -68,15 +73,16 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.thymeleaf.extras</groupId>-->
-<!--            <artifactId>thymeleaf-extras-springsecurity5</artifactId>-->
-<!--        </dependency>-->
-
         <!-- Liquibase -->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase-maven-plugin.version}</version>
         </dependency>
 
         <!-- Lombok -->
@@ -184,7 +190,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven-dependency-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -196,7 +202,7 @@
                                 <artifactItem>
                                     <groupId>com.github.jsimone</groupId>
                                     <artifactId>webapp-runner</artifactId>
-                                    <version>9.0.27.0</version>
+                                    <version>${webapp-runner.version}}</version>
                                     <destFileName>webapp-runner.jar</destFileName>
                                 </artifactItem>
                             </artifactItems>
@@ -207,7 +213,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
