@@ -73,8 +73,7 @@ public class AuthenticationRestControllerV1 {
             response.put("token", token);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (
-                AuthenticationException e) {
+        } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
 

@@ -35,10 +35,11 @@ public class UserServiceImpl implements UserService {
     private TwilioSmsVerificationService twilioSmsVerificationService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder, TwilioSmsVerificationService twilioSmsVerificationService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.twilioSmsVerificationService = twilioSmsVerificationService;
     }
 
     @Override
@@ -69,6 +70,7 @@ public class UserServiceImpl implements UserService {
             user.setStatus(Status.ACTIVE);
             user.setUpdated(getTimestampUTC());
             userRepository.save(user);
+            return user;
         }
         return null;
     }
@@ -92,11 +94,11 @@ public class UserServiceImpl implements UserService {
         User result = userRepository.findById(id).orElse(null);
 
         if (result == null) {
-            log.warn("IN findById - no user found by id: {}", id);
+            log.info("IN findById - no user found by id: {}", id);
             return null;
         }
 
-        log.info("IN findById - user: {} found by id: {}", result);
+        log.info("IN findById - user: {} found by id: {}", result, id);
         return result;
     }
 
