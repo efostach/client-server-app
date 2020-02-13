@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/EmployeeManager-1.0-SNAPSHOT.jar -Dserver.port=$PORT --spring.profiles.active=prod
+web: java $JAVA_OPTS -jar target/EmployeeManager-1.0-SNAPSHOT.jar -Dserver.port=$PORT
