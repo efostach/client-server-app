@@ -18,7 +18,7 @@
 
     <properties>
         <java.versin>1.8</java.versin>
-        <mysql-connector.version>8.0.18</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <junit.version>4.12</junit.version>
 
         <jsp-api.version>2.2</jsp-api.version>
